@@ -14,7 +14,7 @@ License:	GPL
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/%{module}/%{module}-%{version}.tar.gz
 # Source0-md5:	4cd3ce38efbd27c6cf4223f0ced2a5b5
-URL:		http://www.logilab.org/projects/%{module}/view
+URL:		http://www.logilab.org/projects/common/view
 BuildRequires:	python-modules >= 2.2.1
 BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-modules
