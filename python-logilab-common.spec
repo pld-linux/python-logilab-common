@@ -5,7 +5,6 @@
 #	  (I changed sth. is this what author meant?)
 
 %define	module	common
-%include	/usr/lib/rpm/macros.python
 Summary:	Logilab common modules
 Summary(pl):	Wspólne modu³y Logilab
 Name:		python-logilab-common
