@@ -2,6 +2,7 @@
 # TODO:
 #	- check if %%{py_sitescriptdir} used here doesn't break other
 #	  python-logilab packages
+#	  (I changed sth. is this what author meant?)
 
 %define	module	common
 %include	/usr/lib/rpm/macros.python
@@ -9,7 +10,7 @@ Summary:	Logilab common modules
 Summary(pl):	Wspólne modu³y Logilab
 Name:		python-logilab-common
 Version:	0.5.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
@@ -18,7 +19,6 @@ URL:		http://www.logilab.org/projects/common/view
 BuildRequires:	python-modules >= 2.2.1
 BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-modules
-BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -39,6 +39,7 @@ python setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{py_sitedir}/logilab
 
 python setup.py install --optimize=2 --root=$RPM_BUILD_ROOT
 
@@ -46,11 +47,13 @@ python setup.py install --optimize=2 --root=$RPM_BUILD_ROOT
 # and some not, so they all provide the __init__.py and we
 # have to remove it in dependent software and create it
 # here
-touch $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/__init__.py
-%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
-%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
+for DIR in $RPM_BUILD_ROOT{%{py_sitescriptdir},%{py_sitedir}}; do
+touch $DIR/logilab/__init__.py
+%py_comp $DIR/logilab/
+%py_ocomp $DIR/logilab/
 
-find $RPM_BUILD_ROOT%{py_sitescriptdir} -name \*.py -exec rm -f {} \;
+find $DIR -name \*.py -exec rm -f {} \;
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -59,3 +62,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README
 %{py_sitescriptdir}/*
+%{py_sitedir}/*
