@@ -1,8 +1,7 @@
-
 %define	module	common
 %include	/usr/lib/rpm/macros.python
-
 Summary:	Logilab common modules
+Summary(pl):	Wspólne modu³y Logilab
 Name:		python-logilab-common
 Version:	0.2.2
 Release:	0.1
@@ -18,9 +17,14 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The package logilab.common contains several modules providing low level
-functionalities shared among several Python projects developed by
-Logilab.
+The package logilab.common contains several modules providing low
+level functionalities shared among several Python projects developed
+by Logilab.
+
+%description -l pl
+Pakiet logilab.common zawiera ró¿ne modu³y dostarczaj±ce
+niskopoziomow± funkcjonalno¶æ wykorzystywan± przez ró¿ne pythonowe
+projekty tworzone przez Logilab.
 
 %prep
 %setup -q -n %{module}-%{version}
