@@ -36,10 +36,16 @@ python setup.py build
 rm -rf $RPM_BUILD_ROOT
 
 python setup.py install --optimize=2 --root=$RPM_BUILD_ROOT
-find $RPM_BUILD_ROOT%{py_sitedir} -name \*.py -exec rm -f {} \;
 
-# ugly hack, will be fixed in next version
+# because some logilab's software depend on this package
+# and some not, so they all provide the __init__.py and we
+# have to remove it in dependent software and create it
+# here
 touch $RPM_BUILD_ROOT%{py_sitedir}/logilab/__init__.py
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}/logilab/
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/logilab/
+
+find $RPM_BUILD_ROOT%{py_sitedir} -name \*.py -exec rm -f {} \;
 
 %clean
 rm -rf $RPM_BUILD_ROOT
