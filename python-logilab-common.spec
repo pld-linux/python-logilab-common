@@ -4,7 +4,7 @@ Summary:	Logilab common modules
 Summary(pl):	Wspólne modu³y Logilab
 Name:		python-logilab-common
 Version:	0.3.3
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/%{module}/%{module}-%{version}.tar.gz
@@ -37,6 +37,9 @@ rm -rf $RPM_BUILD_ROOT
 
 python setup.py install --optimize=2 --root=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT%{py_sitedir} -name \*.py -exec rm -f {} \;
+
+# ugly hack, will be fixed in next version
+touch $RPM_BUILD_ROOT%{py_sitedir}/logilab/__init__.py
 
 %clean
 rm -rf $RPM_BUILD_ROOT
