@@ -12,7 +12,6 @@ Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
 URL:		http://www.logilab.org/projects/common/view
 BuildArch:	noarch
 BuildRequires:	python-modules >= 2.2.1
-BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
