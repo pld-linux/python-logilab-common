@@ -1,3 +1,8 @@
+
+# TODO:
+#	- check if %%{py_sitescriptdir} used here doesn't break other
+#	  python-logilab packages
+
 %define	module	common
 %include	/usr/lib/rpm/macros.python
 Summary:	Logilab common modules
@@ -41,11 +46,11 @@ python setup.py install --optimize=2 --root=$RPM_BUILD_ROOT
 # and some not, so they all provide the __init__.py and we
 # have to remove it in dependent software and create it
 # here
-touch $RPM_BUILD_ROOT%{py_sitedir}/logilab/__init__.py
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}/logilab/
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/logilab/
+touch $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/__init__.py
+%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
+%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
 
-find $RPM_BUILD_ROOT%{py_sitedir} -name \*.py -exec rm -f {} \;
+find $RPM_BUILD_ROOT%{py_sitescriptdir} -name \*.py -exec rm -f {} \;
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -53,4 +58,4 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
-%{py_sitedir}/*
+%{py_sitescriptdir}/*
