@@ -10,6 +10,7 @@ Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
 # Source0-md5:	f373d4e38e101e593449d972f3e70200
 URL:		http://www.logilab.org/projects/common/view
+BuildArch:	noarch
 BuildRequires:	python-modules >= 2.2.1
 BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-modules
