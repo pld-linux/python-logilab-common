@@ -3,16 +3,19 @@
 Summary:	Logilab common modules
 Summary(pl):	Wspólne modu³y Logilab
 Name:		python-logilab-common
-Version:	0.10.0
+Version:	0.12.0
 Release:	1
 License:	GPL
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
-# Source0-md5:	827603ee7ec459377cf78f0a5eb58d1b
+# Source0-md5:	97d263de68c2ee73cc123969a91f6e7e
 URL:		http://www.logilab.org/projects/common/view
-BuildArch:	noarch
+BuildRequires:	python-devel
 BuildRequires:	python-modules >= 2.2.1
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.112
 %pyrequires_eq	python-modules
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,15 +36,14 @@ python setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{py_sitedir}/logilab
 
-python setup.py install --optimize=2 --root=$RPM_BUILD_ROOT
+python setup.py install \
+	--optimize=2 \
+	--root=$RPM_BUILD_ROOT
 
 # because some logilab's software depend on this package
 # and some not, so they all provide the __init__.py and we
-# have to remove it in dependent software and create it
-# here
-touch $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/__init__.py
+# have to remove it in dependent software
 %py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
 %py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
 
