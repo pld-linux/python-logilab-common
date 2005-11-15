@@ -44,8 +44,6 @@ python setup.py install \
 # because some logilab's software depend on this package
 # and some not, so they all provide the __init__.py and we
 # have to remove it in dependent software
-%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
-%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
 
 find $RPM_BUILD_ROOT%{py_sitescriptdir} -name \*.py -exec rm -f {} \;
 
