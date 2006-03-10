@@ -4,7 +4,7 @@ Summary:	Logilab common modules
 Summary(pl):	Wspólne modu³y Logilab
 Name:		python-logilab-common
 Version:	0.14.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
@@ -44,6 +44,9 @@ python setup.py install \
 # because some logilab's software depend on this package
 # and some not, so they all provide the __init__.py and we
 # have to remove it in dependent software
+touch $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/__init__.py
+%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
+%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/
 
 %py_postclean
 
