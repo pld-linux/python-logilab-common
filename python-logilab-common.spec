@@ -1,7 +1,7 @@
 
 %define	module	logilab-common
 Summary:	Logilab common modules
-Summary(pl):	Wspólne modu³y Logilab
+Summary(pl.UTF-8):   WspÃ³lne moduÅ‚y Logilab
 Name:		python-logilab-common
 Version:	0.21.0
 Release:	1
@@ -23,9 +23,9 @@ The package logilab.common contains several modules providing low
 level functionalities shared among several Python projects developed
 by Logilab.
 
-%description -l pl
-Pakiet logilab.common zawiera ró¿ne modu³y dostarczaj±ce
-niskopoziomow± funkcjonalno¶æ wykorzystywan± przez ró¿ne pythonowe
+%description -l pl.UTF-8
+Pakiet logilab.common zawiera rÃ³Å¼ne moduÅ‚y dostarczajÄ…ce
+niskopoziomowÄ… funkcjonalnoÅ›Ä‡ wykorzystywanÄ… przez rÃ³Å¼ne pythonowe
 projekty tworzone przez Logilab.
 
 %prep
