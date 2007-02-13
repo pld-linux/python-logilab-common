@@ -1,7 +1,7 @@
 
 %define	module	logilab-common
 Summary:	Logilab common modules
-Summary(pl.UTF-8):   Wspólne moduły Logilab
+Summary(pl.UTF-8):	Wspólne moduły Logilab
 Name:		python-logilab-common
 Version:	0.21.0
 Release:	1
