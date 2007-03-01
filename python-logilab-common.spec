@@ -11,7 +11,7 @@ Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
 # Source0-md5:	b9f1d1f1ca1d45184f8117fb761607c8
 URL:		http://www.logilab.org/projects/common/view
 BuildRequires:	python-devel
-BuildRequires:	python-modules >= 2.5
+BuildRequires:	python-modules >= 1:2.5
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python-modules
@@ -56,5 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
-%{_bindir}/pytest
+# isn't name too generic?
+%attr(755,root,root) %{_bindir}/pytest
 %{py_sitescriptdir}/*
