@@ -3,13 +3,13 @@
 Summary:	Logilab common modules
 Summary(pl.UTF-8):	Wspólne moduły Logilab
 Name:		python-logilab-common
-Version:	0.38.1
+Version:	0.44.0
 Release:	1
 License:	GPL
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
-# Source0-md5:	0f78f2def6aec89b615da800ac1dccbe
-URL:		http://www.logilab.org/projects/common/view
+# Source0-md5:	7ae6428e454ebca623807a9dda19f130
+URL:		http://www.logilab.org/project/logilab-common
 BuildRequires:	python-devel
 BuildRequires:	python-modules >= 1:2.5
 BuildRequires:	rpm-pythonprov
