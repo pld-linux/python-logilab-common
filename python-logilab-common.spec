@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	Wspólne moduły Logilab
 Name:		python-logilab-common
 Version:	0.57.1
 Release:	1
-License:	GPL
+License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	ftp://ftp.logilab.fr/pub/common/%{module}-%{version}.tar.gz
 # Source0-md5:	b0431a91f0765be32483d1703747e45a
@@ -32,12 +32,12 @@ projekty tworzone przez Logilab.
 %setup -q -n %{module}-%{version}
 
 %build
-python setup.py build
+%{__python} setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-python setup.py install \
+%{__python} setup.py install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
