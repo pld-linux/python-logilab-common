@@ -58,4 +58,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog README
 # isn't name too generic?
 %attr(755,root,root) %{_bindir}/pytest
-%{py_sitescriptdir}/*
+%dir %{py_sitescriptdir}/logilab
+%{py_sitescriptdir}/logilab/__init__.py[co]
+%{py_sitescriptdir}/logilab/common
+%{py_sitescriptdir}/logilab_common-%{version}-py*-nspkg.pth
+%{py_sitescriptdir}/logilab_common-%{version}-py*.egg-info
