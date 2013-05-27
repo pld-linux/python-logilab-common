@@ -101,6 +101,7 @@ touch $RPM_BUILD_ROOT%{py_sitescriptdir}/logilab/__init__.py
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with python2}
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README
@@ -111,7 +112,9 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/logilab/common
 %{py_sitescriptdir}/logilab_common-%{version}-py*-nspkg.pth
 %{py_sitescriptdir}/logilab_common-%{version}-py*.egg-info
+%endif
 
+%if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
 %doc ChangeLog README
@@ -120,3 +123,4 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitescriptdir}/logilab
 %{py3_sitescriptdir}/logilab_common-%{version}-py*-nspkg.pth
 %{py3_sitescriptdir}/logilab_common-%{version}-py*.egg-info
+%endif
