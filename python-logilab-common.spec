@@ -1,4 +1,4 @@
-
+#
 # Conditional build:
 %bcond_without  python2 # Python 2.x module
 %bcond_without  python3 # Python 3.x module
@@ -7,26 +7,27 @@
 Summary:	Logilab common modules
 Summary(pl.UTF-8):	Wspólne moduły Logilab
 Name:		python-logilab-common
-Version:	0.61.0
-Release:	2
+Version:	0.63.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
-Source0:	http://download.logilab.org/pub/common/%{module}-%{version}.tar.gz
-# Source0-md5:	1506cb79a2468ddf7b09b6bf2855a697
+Source0:	https://pypi.python.org/packages/source/l/logilab-common/%{module}-%{version}.tar.gz
+# Source0-md5:	762a5914de1cb87330a19ec5bb11ce87
+Patch0:		%{name}-py3.patch
 URL:		http://www.logilab.org/project/logilab-common
 %if %{with python2}
 BuildRequires:	python-devel
-BuildRequires:	python-modules >= 1:2.5
+BuildRequires:	python-modules >= 1:2.6
 %endif
 %if %{with python3}
-BuildRequires:	python3-2to3
 BuildRequires:	python3-devel
 BuildRequires:	python3-distribute
-BuildRequires:	python3-modules >= 1:3.1
+BuildRequires:	python3-modules >= 1:3.3
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python-modules
+Requires:	python-six >= 1.4.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,6 +45,7 @@ projekty tworzone przez Logilab.
 Summary:	Logilab common modules
 Summary(pl.UTF-8):	Wspólne moduły Logilab
 Group:		Development/Languages/Python
+Requires:	python3-six >= 1.4.0
 
 %description -n python3-%{module}
 The package logilab.common contains several modules providing low
@@ -57,6 +59,7 @@ projekty tworzone przez Logilab.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p1
 
 # drop python 2.5 egg deps
 %{__rm} */*/*py2.5.egg

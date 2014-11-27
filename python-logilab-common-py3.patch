@@ -1,0 +1,293 @@
+--- logilab-common-0.63.0/cli.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/cli.py	2014-11-26 21:24:52.412063809 +0100
+@@ -33,11 +33,11 @@ Example::
+ 
+         help_do_pionce = ("pionce", "pionce duree", _("met ton corps en veille"))
+         def do_pionce(self):
+-            print 'nap is good'
++            print ('nap is good')
+ 
+         help_do_ronfle = ("ronfle", "ronfle volume", _("met les autres en veille"))
+         def do_ronfle(self):
+-            print 'fuuuuuuuuuuuu rhhhhhrhrhrrh'
++            print ('fuuuuuuuuuuuu rhhhhhrhrhrrh')
+ 
+     cl = BookShell()
+ """
+@@ -66,7 +66,7 @@ def init_readline(complete_method, histf
+             import atexit
+             atexit.register(readline.write_history_file, histfile)
+     except:
+-        print 'readline is not available :-('
++        print ('readline is not available :-(')
+ 
+ 
+ class Completer :
+@@ -157,9 +157,9 @@ class CLIHelper:
+         return self.commands.keys()
+ 
+     def _print_help(self, cmd, syntax, explanation):
+-        print _('Command %s') % cmd
+-        print _('Syntax: %s') % syntax
+-        print '\t', explanation
++        print (_('Command %s') % cmd)
++        print (_('Syntax: %s') % syntax)
++        print ('\t%s' % explanation)
+         print
+ 
+ 
+@@ -170,20 +170,20 @@ class CLIHelper:
+         if command in self._command_help:
+             self._print_help(*self._command_help[command])
+         elif command is None or command not in self._topics:
+-            print _("Use help <topic> or help <command>.")
+-            print _("Available topics are:")
++            print (_("Use help <topic> or help <command>."))
++            print (_("Available topics are:"))
+             topics = sorted(self._topics.keys())
+             for topic in topics:
+-                print '\t', topic
++                print ('\t%s' % topic)
+             print
+-            print _("Available commands are:")
++            print (_("Available commands are:"))
+             commands = self.commands.keys()
+             commands.sort()
+             for command in commands:
+-                print '\t', command[len(self.CMD_PREFIX):]
++                print ('\t%s' % command[len(self.CMD_PREFIX):])
+ 
+         else:
+-            print _('Available commands about %s:') % command
++            print (_('Available commands about %s:') % command)
+             print
+             for command_help_method in self._topics[command]:
+                 try:
+@@ -194,8 +194,8 @@ class CLIHelper:
+                 except:
+                     import traceback
+                     traceback.print_exc()
+-                    print 'ERROR in help method %s'% (
+-                        command_help_method.__name__)
++                    print ('ERROR in help method %s'% (
++                        command_help_method.__name__))
+ 
+     help_do_help = ("help", "help [topic|command]",
+                     _("print help message for the given topic/command or \
+--- logilab-common-0.63.0/daemon.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/daemon.py	2014-11-26 21:22:26.658736590 +0100
+@@ -51,7 +51,7 @@ def setugid(user):
+     os.environ['HOME'] = passwd.pw_dir
+ 
+ 
+-def daemonize(pidfile=None, uid=None, umask=077):
++def daemonize(pidfile=None, uid=None, umask=0o77):
+     """daemonize a Unix process. Set paranoid umask by default.
+ 
+     Return 1 in the original process, 2 in the first fork, and None for the
+@@ -95,7 +95,7 @@
+         f = file(pidfile, 'w')
+         f.write(str(os.getpid()))
+         f.close()
+-        os.chmod(pidfile, 0644)
++        os.chmod(pidfile, 0o644)
+     # change process uid
+     if uid:
+         setugid(uid)
+--- logilab-common-0.63.0/dbf.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/dbf.py	2014-11-26 16:50:57.296086859 +0100
+@@ -79,7 +79,7 @@ class Dbase:
+     def open(self, db_name):
+         filesize = os.path.getsize(db_name)
+         if filesize <= 68:
+-            raise IOError, 'The file is not large enough to be a dbf file'
++            raise IOError('The file is not large enough to be a dbf file')
+ 
+         self.fdb = open(db_name, 'rb')
+ 
+@@ -152,7 +152,7 @@ class Dbase:
+         This function accept record number from 0 to N-1
+         """
+         if rec_no < 0 or rec_no > self.num_records:
+-            raise Exception, 'Unable to extract data outside the range'
++            raise Exception('Unable to extract data outside the range')
+ 
+         offset = self.header['Record Size'] * rec_no
+         data = self.db_data[offset:offset+self.row_len]
+@@ -227,4 +227,4 @@ def readDbf(filename):
+ if __name__=='__main__':
+     rec = readDbf('dbf/sptable.dbf')
+     for line in rec:
+-        print '%s %s' % (line['GENUS'].strip(), line['SPECIES'].strip())
++        print ('%s %s' % (line['GENUS'].strip(), line['SPECIES'].strip()))
+--- logilab-common-0.63.0/optparser.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/optparser.py	2014-11-26 16:47:03.622763332 +0100
+@@ -55,9 +55,9 @@ class OptionParser(optparse.OptionParser
+ 
+     def print_main_help(self):
+         optparse.OptionParser.print_help(self)
+-        print '\ncommands:'
++        print ('\ncommands:')
+         for cmdname, (_, help) in self._commands.items():
+-            print '% 10s - %s' % (cmdname, help)
++            print ('% 10s - %s' % (cmdname, help))
+ 
+     def parse_command(self, args):
+         if len(args) == 0:
+@@ -78,7 +78,7 @@
+         # optparse inserts self.description between usage and options help
+         self.description = help
+         if isinstance(mod_or_f, str):
+-            exec 'from %s import run, add_options' % mod_or_f
++            exec ('from %s import run, add_options' % mod_or_f)
+         else:
+             run, add_options = mod_or_f
+         add_options(self)
+--- logilab-common-0.63.0/test/data/module2.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/test/data/module2.py	2014-11-26 21:38:42.425362311 +0100
+@@ -1,4 +1,5 @@
+ from data.module import YO, YOUPI
++from six import print_
+ import data
+ 
+ class Specialization(YOUPI, YO): pass
+@@ -38,14 +38,14 @@
+ 
+ del YO
+ [SYN1, SYN2] = Concrete0, Concrete1
+-assert `1`
++assert repr(1)
+ b = 1 | 2 & 3 ^ 8
+-exec 'c = 3'
+-exec 'c = 3' in {}, {}
++exec('c = 3')
++exec('c = 3' in {}, {})
+ 
+ def raise_string(a=2, *args, **kwargs):
+     raise 'pas glop'
+-    raise Exception, 'yo'
++    raise Exception('yo')
+     yield 'coucou'
+ 
+ a = b + 2
+@@ -66,8 +67,8 @@ e = d[a:b:c]
+ 
+ raise_string(*args, **kwargs)
+ 
+-print >> stream, 'bonjour'
+-print >> stream, 'salut',
++print_('bonjour', file=stream)
++print_('salut', file=stream)
+ 
+ 
+ def make_class(any, base=data.module.YO, *args, **kwargs):
+--- logilab-common-0.63.0/test/data/module.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/test/data/module.py	2014-11-26 21:35:43.185369834 +0100
+@@ -5,6 +5,7 @@
+ 
+ from logilab.common import modutils, Execute as spawn
+ from logilab.common.astutils import *
++from six import print_
+ import os.path
+ 
+ MY_DICT = {}
+@@ -21,7 +22,7 @@ def global_access(key, val):
+         else:
+             break
+     else:
+-        print '!!!'
++        print ('!!!')
+ 
+ class YO:
+     """hehe"""
+@@ -51,9 +52,9 @@ class YOUPI(YO):
+             local = None
+             autre = [a for a, b in MY_DICT if b]
+             if b in autre:
+-                print 'yo',
++                print_ ('yo', end=' ')
+             elif a in autre:
+-                print 'hehe'
++                print ('hehe')
+             global_access(local, val=autre)
+         finally:
+             return local
+@@ -66,7 +66,7 @@
+ 
+     def class_method(cls):
+         """class method test"""
+-        exec a in b
++        exec(a in b)
+     class_method = classmethod(class_method)
+ 
+ 
+@@ -69,19 +70,19 @@ class YOUPI(YO):
+     class_method = classmethod(class_method)
+ 
+ 
+-def nested_args(a, (b, c, d)):
++def nested_args(a, bcd_tuple):
+     """nested arguments test"""
+-    print a, b, c, d
++    print_ (a, bcd_tuple[0], ccd_tuple[1], bcd_tuple[2])
+     while 1:
+         if a:
+             break
+         a += +1
+     else:
+-        b += -2
+-    if c:
+-        d = a and b or c
++        bcd_tuple[0] += -2
++    if bcd_tuple[1]:
++        bcd_tuple[2] = a and bcd_tuple[0] or bcd_tuple[2]
+     else:
+-        c = a and b or d
++        c = a and bcd_tuple[0] or bcd_tuple[2]
+     map(lambda x, y: (y, x), a)
+ 
+ redirect = nested_args
+--- logilab-common-0.63.0/test/data/noendingnewline.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/test/data/noendingnewline.py	2014-11-26 21:36:18.038701700 +0100
+@@ -20,7 +20,7 @@ class TestCase(unittest.TestCase):
+     def xxx(self):
+         if False:
+             pass
+-            print 'a'
++            print ('a')
+ 
+         if False:
+             pass
+@@ -28,9 +28,9 @@ class TestCase(unittest.TestCase):
+ 
+         if False:
+             pass
+-            print 'rara'
++            print ('rara')
+ 
+ 
+ if __name__ == '__main__':
+-    print 'test2'
++    print ('test2')
+     unittest.main()
+--- logilab-common-0.63.0/test/data/nonregr.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/test/data/nonregr.py	2014-11-26 21:25:29.042062272 +0100
+@@ -11,4 +11,4 @@ except NameError:
+ 
+ def toto(value):
+     for k, v in value:
+-        print v.get('yo')
++        print (v.get('yo'))
+--- logilab-common-0.63.0/test/data/sub/momo.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/test/data/sub/momo.py	2014-11-26 21:38:57.622028341 +0100
+@@ -1 +1 @@
+-print 'yo'
++print('yo')
+--- logilab-common-0.63.0/urllib2ext.py.orig	2014-11-05 15:06:19.000000000 +0100
++++ logilab-common-0.63.0/urllib2ext.py	2014-11-26 16:46:24.119431660 +0100
+@@ -84,4 +84,4 @@ if __name__ == '__main__':
+     # test with url sys.argv[1]
+     h = HTTPGssapiAuthHandler()
+     response = urllib2.build_opener(h, ch).open(sys.argv[1])
+-    print '\nresponse: %s\n--------------\n' % response.code, response.info()
++    print ('\nresponse: %s\n--------------\n' % response.code, response.info())
