@@ -7,22 +7,22 @@
 Summary:	Logilab common modules
 Summary(pl.UTF-8):	Wspólne moduły Logilab
 Name:		python-logilab-common
-Version:	0.63.0
-Release:	2
+Version:	0.63.2
+Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 Source0:	https://pypi.python.org/packages/source/l/logilab-common/%{module}-%{version}.tar.gz
-# Source0-md5:	762a5914de1cb87330a19ec5bb11ce87
-Patch0:		%{name}-py3.patch
+# Source0-md5:	2bf4599ae1f2ccf4603ca02c5d7e798e
 URL:		http://www.logilab.org/project/logilab-common
 %if %{with python2}
 BuildRequires:	python-devel
 BuildRequires:	python-modules >= 1:2.6
+BuildRequires:	python-setuptools >= 7.0
 %endif
 %if %{with python3}
 BuildRequires:	python3-devel
-BuildRequires:	python3-distribute
-BuildRequires:	python3-modules >= 1:3.3
+BuildRequires:  python3-modules >= 1:3.3
+BuildRequires:	python3-setuptools >= 7.0
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -59,7 +59,6 @@ projekty tworzone przez Logilab.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch0 -p1
 
 # drop python 2.5 egg deps
 %{__rm} */*/*py2.5.egg
