@@ -11,6 +11,7 @@ Version:	0.63.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
+#Source0Download: https://pypi.python.org/pypi/logilab-common
 Source0:	https://pypi.python.org/packages/source/l/logilab-common/%{module}-%{version}.tar.gz
 # Source0-md5:	2bf4599ae1f2ccf4603ca02c5d7e798e
 URL:		http://www.logilab.org/project/logilab-common
