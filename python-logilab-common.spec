@@ -66,17 +66,17 @@ projekty tworzone przez Logilab.
 
 %build
 %if %{with python2}
-%{__python} setup.py build
+%py_build
 %endif
 %if %{with python3}
-%{__python3} setup.py build --build-base=build3
+%py3_build --build-base=build3
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %if %{with python3}
-%{__python3} setup.py build --build-base=build3 install \
+%py3_build --build-base=build3 install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
@@ -88,9 +88,7 @@ mv $RPM_BUILD_ROOT%{_bindir}/pytest{,3}
 %endif
 
 %if %{with python2}
-%{__python} setup.py install \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 # because some logilab's software depend on this package
 # and some not, so they all provide the __init__.py and we
