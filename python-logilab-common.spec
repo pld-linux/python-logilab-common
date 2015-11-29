@@ -26,7 +26,7 @@ BuildRequires:  python3-modules >= 1:3.3
 BuildRequires:	python3-setuptools >= 7.0
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 %pyrequires_eq	python-modules
 Requires:	python-six >= 1.4.0
 BuildArch:	noarch
