@@ -8,7 +8,7 @@ Summary:	Logilab common modules
 Summary(pl.UTF-8):	Wspólne moduły Logilab
 Name:		python-logilab-common
 Version:	0.63.2
-Release:	4
+Release:	5
 License:	LGPL v2.1+
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.python.org/pypi/logilab-common
@@ -69,16 +69,14 @@ projekty tworzone przez Logilab.
 %py_build
 %endif
 %if %{with python3}
-%py3_build --build-base=build3
+%py3_build
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %if %{with python3}
-%py3_build --build-base=build3 install \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py3_install
 
 touch $RPM_BUILD_ROOT%{py3_sitescriptdir}/logilab/__init__.py
 %py3_comp $RPM_BUILD_ROOT%{py3_sitescriptdir}/logilab/
