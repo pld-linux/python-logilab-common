@@ -18,15 +18,15 @@ URL:		http://www.logilab.org/project/logilab-common
 %if %{with python2}
 BuildRequires:	python-devel
 BuildRequires:	python-modules >= 1:2.6
-BuildRequires:	python-setuptools >= 7.0
+BuildRequires:	python-setuptools >= 1:7.0
 %endif
 %if %{with python3}
 BuildRequires:	python3-devel
 BuildRequires:  python3-modules >= 1:3.3
-BuildRequires:	python3-setuptools >= 7.0
+BuildRequires:	python3-setuptools >= 1:7.0
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 %pyrequires_eq	python-modules
 Requires:	python-six >= 1.4.0
 BuildArch:	noarch
